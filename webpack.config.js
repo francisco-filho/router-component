@@ -8,7 +8,7 @@ const config = {
   output: {
     path: Path.join(__dirname, './build') ,
     filename: '[name]-bundle.js'
-    },
+  },
   module: {
     loaders: [{
       test: /\.js$/, loader: 'babel', include: Path.resolve(process.cwd(), './src'),
@@ -16,13 +16,20 @@ const config = {
           presets: ['es2015', 'react'],
           plugins: ['transform-es2015-modules-commonjs']
         }
-      }]
-    },
+    }]
+  },
   resolve: {
     extension: ['', '.js'],
     modulesDirectories: ['node_modules']
-    },
-
+  },
+  devServer: {
+    contentBase: process.cwd(),
+    port: 3000,
+    hot: true, 
+    inline: true,
+    publicPath: Path.resolve(process.cwd(), '/public/'),
+    stats: { colors: true }
+  }
 }
 
 module.exports = config
