@@ -2,6 +2,11 @@
   "name": "todo",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --progress --colors --watch",
+    "serve": "webpack-dev-server --hot --inline --port 3000"
+  },
   "license": "MIT",
   "dependencies": {
     "babel-core": "^6.18.0",
@@ -11,6 +16,7 @@
     "babel-preset-react": "^6.16.0",
     "css-loader": "^0.25.0",
     "react": "^15.3.2",
+    "react-dom": "^15.3.2",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.3"
   }
