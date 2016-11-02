@@ -20,7 +20,7 @@ const Router = Object.assign({}, EventEmitter.prototype, {
         e.preventDefault()
         let previousState = this.queryStringToJSON()
         window.history.pushState(previousState, null, e.target.getAttribute('href'))
-        this.executeRoute()
+        this.executeRoute(previousState)
       }
     })
 
@@ -34,14 +34,21 @@ const Router = Object.assign({}, EventEmitter.prototype, {
     })
   },
 
-  executeRoute(){
+  executeRoute(oldState){
     let route = this.get(location.pathname)
     if (!route){
       console.debug(`Rota inválida [ ${location.pathname} ], crie novas rotas com Route.add().`)
       this.redirectTo(this.defaultRoute)  
       return
     }
+
     let state = this.queryStringToJSON()
+    if (oldState && oldState.route === state.route){
+      if (state.params && oldState.params &&
+        this.isShallowEqual(oldState.params, state.params)){
+        return;
+      }
+    }
 
     if (route && route.fn)
       route.fn.call(null, state.params)
