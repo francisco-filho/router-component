@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import table from './data'
 import Excel from './excel'
-import Router from '../router/router'
-import Link from '../router/link'
+import Router, { Link } from '../router/router'
 
 class App extends Component {
     constructor(props){
