@@ -34,6 +34,10 @@ const Router = Object.assign({}, EventEmitter.prototype, {
     })
   },
 
+  setDefault(route){
+    this.defaultRoute = route
+  },
+
   executeRoute(oldState){
     let route = this.get(location.pathname)
     if (!route){
