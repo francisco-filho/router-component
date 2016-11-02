@@ -27,15 +27,16 @@ class App extends Component {
 
     componentDidMount(){
       Router.addListener('routechanged', (route) => {
-        console.log('routechanged-> Should render: ', route.params) 
         this._routing(route.params) 
       })
     }
 
     render(){
-    return (<div><h1>Router</h1>
-        { this.state.children }
-      </div>
+    return (
+        <div>
+          <h1>Router</h1>
+          { this.state.children }
+        </div>
       )
     }
 }
@@ -55,26 +56,26 @@ window.Router = Object.assign({}, EventEmitter.prototype, {
       this.emit('routechanged', state)
     })
 
-    document.querySelectorAll('a.routed').forEach((a) => a.addEventListener('click', (e)=> {
-      e.preventDefault()
-      let previousState = this.queryStringToJSON()
-      window.history.pushState(previousState, null, e.target.getAttribute('href'))
+    document.body.addEventListener('click', (e)=>{
+      if (e.target.tagName === 'A' && e.target.classList.contains('routed')){
+        e.preventDefault()
+        let previousState = this.queryStringToJSON()
+        window.history.pushState(previousState, null, e.target.getAttribute('href'))
+        let route = this.get(location.pathname)
 
-      let route = this.get(location.pathname)
-      // console.debug('route', state, route, location.pathname)
+        if (!route){
+          console.debug(`Rota inválida [ ${location.pathname} ], adicione novas rotas com Route.add().`)
+          this.redirectTo(this.defaultRoute)  
+          return
+        }
+        let state = this.queryStringToJSON()
 
-      if (!route){
-        console.debug('invalid route', location.pathname)
-        this.redirectTo(this.defaultRoute)  
-        return
+        if (route.fn)
+          route.fn.call(null, state.params)
+
+        this.emit('routechanged', state)
       }
-      let state = this.queryStringToJSON()
-
-      if (route.fn)
-        route.fn.call(null, state.params)
-
-      this.emit('routechanged', state)
-    }))
+    })
 
     window.addEventListener('load', (e) => {
       let route = this.get(location.pathname)
