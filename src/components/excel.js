@@ -28,7 +28,6 @@ class Excel extends Component {
     this.setState({ data, sortby, descending })
   }
 
-
   _showEditor(e){
     this.setState({
       edit: {
@@ -77,7 +76,7 @@ class Excel extends Component {
   render(){
     let edit = this.state.edit
     return (
-      <div>
+      <div><h1 className="title">{this.props.query}</h1>
       { this._renderToolbar() }
       <table className="table"><thead><tr>
           { this.props.headers.map((h, idx) => {

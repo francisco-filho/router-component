@@ -16,7 +16,9 @@ class App extends Component {
     _routing(params){
       if (params.query){
       this.setState({ 
-        children: <Excel headers={ table.headers } initialData={ table.data }/>
+        children: <Excel headers={ table.headers } 
+          initialData={ table.data } i
+          query={params.query}/>
       })
       } else {
         this.setState({ children: <h1>Index Page</h1> })
@@ -40,6 +42,7 @@ class App extends Component {
 
 window.Router = Object.assign({}, EventEmitter.prototype, {
   initiated: false, 
+  defaultRoute: '/',
   routes: [],
 
   init(){
@@ -57,8 +60,16 @@ window.Router = Object.assign({}, EventEmitter.prototype, {
       let previousState = this.queryStringToJSON()
       window.history.pushState(previousState, null, e.target.getAttribute('href'))
 
-      let state = this.queryStringToJSON()
       let route = this.get(location.pathname)
+      // console.debug('route', state, route, location.pathname)
+
+      if (!route){
+        console.debug('invalid route', location.pathname)
+        this.redirectTo(this.defaultRoute)  
+        return
+      }
+      let state = this.queryStringToJSON()
+
       if (route.fn)
         route.fn.call(null, state.params)
 
@@ -66,8 +77,21 @@ window.Router = Object.assign({}, EventEmitter.prototype, {
     }))
 
     window.addEventListener('load', (e) => {
-      this.emit('pushstate', this.queryStringToJSON())
+      let route = this.get(location.pathname)
+      if (!route){
+        this.redirectTo(this.defaultRoute)  
+        return
+      }
+      this.emit('routechanged', this.queryStringToJSON())
     })
+  },
+
+  redirectTo(route){
+    window.history.pushState({}, null, route)
+    let state = this.queryStringToJSON()
+    if (route.fn)
+      route.fn.call(null, state.params)
+    this.emit('routechanged', state)
   },
 
   add(route, fn){
@@ -76,7 +100,7 @@ window.Router = Object.assign({}, EventEmitter.prototype, {
   },
 
   get(route){
-    return this.routes.find( r => r.route == route )
+    return this.routes.find( r => r.route === route )
   },
 
   queryStringToJSON(){
