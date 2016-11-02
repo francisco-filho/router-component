@@ -1,5 +1,6 @@
 let Path = require('path'),
-  webpack = require('webpack')
+  webpack = require('webpack'),
+  HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const config = {
   entry: {
@@ -22,6 +23,9 @@ const config = {
     extension: ['', '.js'],
     modulesDirectories: ['node_modules']
   },
+  plugins: [
+    new HtmlWebpackPlugin({ template: Path.resolve(__dirname, 'index.html')})
+  ],
   devServer: {
     contentBase: process.cwd(),
     port: 3000,

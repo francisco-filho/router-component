@@ -17,6 +17,7 @@ class Excel extends Component {
   }
 
   _sort(evt){
+    console.log('sorting')
     let sortby = evt.target.cellIndex,
         data = this.state.data.slice(),
         descending = this.state.sortby === sortby && !this.state.descending
@@ -29,7 +30,6 @@ class Excel extends Component {
 
 
   _showEditor(e){
-    console.log('novidades')
     this.setState({
       edit: {
         row: parseInt(e.target.parentNode.getAttribute('data-row')),
