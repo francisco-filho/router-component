@@ -88,25 +88,21 @@ class Excel extends Component {
             })
           } 
       </tr></thead>
-      <tbody>
-        { (this.state.search == true) ?  this._renderSearch() : '' }
-        { 
-        this.state.data.map((row, idx) => {
+      <tbody>{(this.state.search == true) ?  this._renderSearch() : null }
+        { this.state.data.map((row, idx) => {
           return <tr key={ idx } data-row={ idx } onDoubleClick={evt => this._showEditor(evt)}>
             {
               row.map((td, idxt) => {
                 if (edit && edit.row == idx && edit.cell == idxt)
                 return <td key={idxt}><form onSubmit={ evt => this._save(evt) }>
                   <input type="text" defaultValue={ td }/></form></td>
-
                 else
                   return <td key={idxt}> { td }</td>
               })
             }
           </tr>
         })
-      }
-      </tbody>
+      }</tbody>
       </table>
     </div>
     ) 
