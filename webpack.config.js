@@ -6,7 +6,7 @@ const config = {
     app: ['babel-polyfill', Path.resolve(process.cwd(),'src/components/app')]
   },
   output: {
-    path: Path.join(__dirname, './build') ,
+    path: Path.join(__dirname, 'build') ,
     filename: '[name]-bundle.js'
   },
   module: {
@@ -27,7 +27,7 @@ const config = {
     port: 3000,
     hot: true, 
     inline: true,
-    publicPath: Path.resolve(process.cwd(), '/public/'),
+    publicPath: Path.resolve(process.cwd(), '/build/'),
     stats: { colors: true }
   }
 }
