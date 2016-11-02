@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import table from './data'
 import Excel from './excel'
-import Router from './router'
+import Router from '../router/router'
+import Link from '../router/link'
 
 class App extends Component {
     constructor(props){
@@ -10,19 +11,16 @@ class App extends Component {
         this._routing = this._routing.bind(this)
         this.state = { children: null }
 
-        Router.add('/') 
+        Router.add('/', (e) => {
+          if (e.query)
+            console.info('Chamando Actions.updateResults()', e.query)
+        }) 
     }
 
     _routing(params){
-      if (params.query){
-      this.setState({ 
-        children: <Excel headers={ table.headers } 
-          initialData={ table.data } i
-          query={JSON.stringify(params)}/>
-      })
-      } else {
-        this.setState({ children: <h1>Index Page</h1> })
-      }
+      let hasQuery = params && params.query
+      this.setState({ query: hasQuery ? params.query : hasQuery} ) 
+
     }
 
     componentDidMount(){
@@ -35,7 +33,18 @@ class App extends Component {
       return (
         <div>
           <h1>Router</h1>
-          { this.state.children }
+          <div className="row">
+            <Link to="?query=novidades especiais" className="btn btn-default">Novo</Link> 
+            <a className="btn btn-info" onClick={()=> Router.goTo('?query=go_to')}>GoTo /?query=go_to</a>
+          </div>
+        { (this.state.query) ?
+            <Excel 
+            headers={ table.headers } 
+            initialData={ table.data } i
+            query={JSON.stringify(this.state.query)}/>
+          : <h1>Index page</h1>
+          
+        }
         </div>
       )
     }
