@@ -1,3 +1,4 @@
+import React, { Component } from 'react'
 import { EventEmitter } from 'events'
 
 const Router = Object.assign({}, EventEmitter.prototype, {
