@@ -4,7 +4,9 @@ import { EventEmitter } from 'events'
 const Router = Object.assign({}, EventEmitter.prototype, {
   initiated: false, 
   defaultRoute: '/',
-  routes: [], init(){
+  routes: [], 
+
+  init(){
     this.initiated = true
 
     window.addEventListener('popstate', (e)=> {
@@ -68,6 +70,7 @@ const Router = Object.assign({}, EventEmitter.prototype, {
   add(route, fn){
     if (!this.initiated) this.init()
     this.routes.push({ route, fn: fn ? fn : undefined })
+    return this
   },
 
   get(route){
