@@ -4,8 +4,9 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "watch": "webpack --progress --colors --watch",
-    "serve": "webpack-dev-server --hot --inline --port 3000"
+    "watch": "webpack --colors --progress --watch",
+    "serve": "webpack-dev-server --hot --inline --port 3000",
+    "all": "concurrently --kill-others 'nodemon server.js' 'webpack --colors --watch'"
   },
   "license": "MIT",
   "dependencies": {
@@ -20,6 +21,7 @@
     "install": "^0.8.2",
     "npm": "^3.10.9",
     "react": "^15.3.2",
+    "react-addons-css-transition-group": "^15.3.2",
     "react-dom": "^15.3.2",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.3"
