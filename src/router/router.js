@@ -24,7 +24,7 @@ const Router = Object.assign({}, EventEmitter.prototype, {
       }
     })
 
-    window.addEventListener('load', (e) => {
+    window.addEventListener('DOMContentLoaded', (e) => {
       let route = this.get(location.pathname)
       if (!route){
         this.redirectTo(this.defaultRoute)  
@@ -84,8 +84,8 @@ const Router = Object.assign({}, EventEmitter.prototype, {
 
   queryStringToJSON(){
     let json = { route: window.location.pathname, params: {}}
-    location.href.replace(location.origin,'')
-      .replace('/\?','')
+    let search = location.href.split('?')[1]
+    search && search.replace('/\?','')
       .split('&')
       .forEach(q => {
         let fragments = q.split('=')
@@ -98,7 +98,6 @@ const Router = Object.assign({}, EventEmitter.prototype, {
   isShallowEqual(a, b) {
       var aProps = Object.getOwnPropertyNames(a);
       var bProps = Object.getOwnPropertyNames(b);
-
       // checa primeiro quantidade de parametros
       if (aProps.length != bProps.length) {
           return false;

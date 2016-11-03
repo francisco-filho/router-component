@@ -27,7 +27,7 @@ const config = {
     modulesDirectories: ['node_modules']
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: Path.resolve(__dirname, 'index.html')})
+    // new HtmlWebpackPlugin({ template: Path.resolve(__dirname, 'index.html')})
   ],
   devServer: {
     contentBase: process.cwd(),

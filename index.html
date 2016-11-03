@@ -3,21 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <base href="/home/">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      <style type="text/css">
+        a.btn {
+          margin-right: 10px;
+        }
+				.route-transition-enter {
+					opacity: 0.01;
+					background-color: red;
+				}
+
+				.route-transition-enter.route-transition-enter-active {
+					opacity: 1;
+					transition: all 800ms ease-in;
+				}
+
+				.route-transition-leave {
+					opacity: 1;
+				}
+
+				.route-transition-leave.route-transition-leave-active {
+					opacity: 0.01;
+					transition: all 600ms ease-in;
+				}
+      </style>
 </head>
 <body>
   <div class="container">
-    <div class="row">
-      <a class="routed btn btn-primary" href="/">Index</a>
-      <a class="routed btn btn-default" href="?query=a&q2=c">query a</a>
-      <a class="routed btn btn-default" href="?query=b">query b</a>
-      <a class="routed btn btn-danger" href="/query/c">Inválido</a>
-      <a class="not-routed btn btn-warning" href="/">Link sem rota</a>
-    </div>
-
     <div id="app"></div>
   </div>
-  <script src="build/app-bundle.js"></script>
-  <script type="text/javascript"> </script>
+  <script src="app-bundle.js"></script>
 </body>
 </html>
