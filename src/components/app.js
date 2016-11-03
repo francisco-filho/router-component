@@ -11,10 +11,12 @@ class App extends Component {
         this._routing = this._routing.bind(this)
         this.state = { children: null }
 
-        Router.add('/home/', (e) => {
-          if (e.query)
-            console.info('Chamando Actions.updateResults()', e.query)
+        Router
+          .add('/home/', (e) => {
+            if (e.query)
+              console.info('Chamando Actions.updateResults()', e.query)
           })
+          .setDefault('/home/')
     }
 
     _routing(params){
