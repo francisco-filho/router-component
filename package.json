@@ -5,6 +5,7 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack --colors --progress --watch",
+    "test": "mocha --compilers js:babel-register test/index.js",
     "serve": "webpack-dev-server --hot --inline --port 3000",
     "all": "concurrently --kill-others 'nodemon server.js' 'webpack --colors --watch'"
   },
@@ -19,11 +20,19 @@
     "css-loader": "^0.25.0",
     "html-webpack-plugin": "^2.24.1",
     "install": "^0.8.2",
+    "mocha-loader": "^1.0.0",
     "npm": "^3.10.9",
     "react": "^15.3.2",
     "react-addons-css-transition-group": "^15.3.2",
     "react-dom": "^15.3.2",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.3"
+  },
+  "devDependencies": {
+    "babel-register": "^6.18.0",
+    "chai": "^3.5.0",
+    "jsdom-global": "^2.1.0",
+    "mocha": "^3.1.2",
+    "sinon": "^1.17.6"
   }
 }

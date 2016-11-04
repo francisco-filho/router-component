@@ -13,13 +13,13 @@ const config = {
   module: {
     loaders: [{
       test: /\.js$/, loader: 'babel', include: Path.resolve(process.cwd(), './src'),
-        query: {
+      /*  query: {
           presets: ['es2015', 'react'],
           plugins: [
             ["transform-object-rest-spread", { "useBuiltIns": true }],
             ['transform-es2015-modules-commonjs']
           ]
-        }
+          }*/
     }]
   },
   resolve: {
