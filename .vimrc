@@ -4,7 +4,6 @@ set shiftwidth=2
 set expandtab
 set syntax=on
 
-
 "disable scrollbars, menu and toolbar from gvim
 set guioptions-=T
 set guioptions-=m
@@ -23,6 +22,7 @@ set lcs+=space:·
 
 "VimPlug plugins enabled
 call plug#begin()
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-pathogen'
 Plug 'Raimondi/delimitMate'
