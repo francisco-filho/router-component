@@ -43,10 +43,6 @@ class App extends Component {
             <Link to="?query=novidades especiais" className="btn btn-default">Novo</Link> 
             <a className="btn btn-info" onClick={()=> Router.goTo('?query=go_to')}>GoTo /?query=go_to</a>
           </div>
-        <ReactCSSTransitionGroup
-          transitionName="route-transition"
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={300}>
         { (this.state.query) ?
             <Excel 
             headers={ table.headers } 
@@ -54,14 +50,12 @@ class App extends Component {
             query={JSON.stringify(this.state.query)}/>
           : <IndexPage message="Hello React"/>          
         }
-        </ReactCSSTransitionGroup>
         </div>
       )
     }
 }
 
-function IndexPage(props){
-  return <h1>Index page { !!props && props.message}</h1>
+export const IndexPage = ({message}) => {
+  return <h1>Index page {message}</h1>
 }
-
-render(<App/>, document.getElementById('app'))
+//render(<App/>, document.getElementById('app'))
