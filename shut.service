@@ -1,0 +1,12 @@
+[Unit]
+Description=App System Shutdown
+DefaultDependencies=no
+Before=shutdown.target reboot.target halt.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c 'echo "down before postgres" > /dados/down-$(date +"%%Y%%m%%d-%%H%%M").log 2>&1'
+RemainAfterExit=yes
+
+[Install]
+WantedBy=shutdown.target halt.target reboot.target
