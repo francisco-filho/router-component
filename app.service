@@ -1,0 +1,10 @@
+[Unit]
+Description=App System
+After=syslog.target network.target getty.target postgresql-9.6.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c '/dados/query > /dados/query-$(date +"%%Y%%m%%d-%%H%%M").log 2>&1'
+
+[Install]
+WantedBy=multi-user.target
